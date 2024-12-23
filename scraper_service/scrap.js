@@ -1,13 +1,41 @@
 const puppeteer = require('puppeteer');
 const kafka = require('kafkajs').Kafka;
 
+
+
+
 (async () => {
     const kafkaClient = new kafka({ clientId: 'scrape-service', brokers: ['kafka:9092'] });
     const producer = kafkaClient.producer();
+/*    async function createTopic() {
 
+        const admin = kafka.admin();
+        await admin.connect();
+        
+        const topicName = 'alerts';
+        
+        try {
+            const topics = await admin.listTopics();
+        
+            if (topics.includes(topicName)) {
+            console.log(`Tópico '${topicName}' ya existe.`);
+            } else {
+            await admin.createTopics({
+                topics: [{ topic: topicName, numPartitions: 1, replicationFactor: 1 }]
+            });
+            console.log(`Tópico '${topicName}' creado.`);
+            }
+        } catch (err) {
+            console.error(`Error al crear el tópico: ${err.message}`);
+        } finally {
+            await admin.disconnect();
+        }
+        }
+        createTopic();*/
     try {
         await producer.connect();
         console.log('Conectado a Kafka como productor.');
+
 
         const browser = await puppeteer.launch({
             headless: true,
@@ -91,7 +119,7 @@ const kafka = require('kafkajs').Kafka;
             }
         }
 
-        await buscar(originSelector, 'Maipu');
+        await buscar(originSelector, 'Santiago');
 
         console.log('Procesamiento finalizado. Cerrando el navegador...');
 
