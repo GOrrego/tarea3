@@ -2,6 +2,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StringType, TimestampType
 from elasticsearch import Elasticsearch
+from kafka.admin import KafkaAdminClient, NewTopic
+from kafka.errors import TopicAlreadyExistsError
+
 
 # Crear sesión de Spark
 spark = SparkSession.builder \
@@ -9,6 +12,8 @@ spark = SparkSession.builder \
     .config("spark.master", "local[*]") \
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0") \
     .getOrCreate()
+
+
 
 # Esquema del mensaje JSON
 schema = StructType() \
