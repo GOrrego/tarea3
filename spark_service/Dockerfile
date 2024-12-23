@@ -16,7 +16,7 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 
 # Descargar e instalar Apache Spark
 ENV SPARK_VERSION=3.5.0
-RUN curl -s https://downloads.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz | tar -xz -C /opt/ && \
+RUN curl -s https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz | tar -xz -C /opt/ && \
     mv /opt/spark-${SPARK_VERSION}-bin-hadoop3 /opt/spark
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
